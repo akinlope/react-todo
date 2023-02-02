@@ -1,13 +1,13 @@
-const View = ({ data, lastNum }) => {
-  // console.log(lastNum);
+const View = ({ isTodo }) => {
+  // console.log(isTodo);
   return (
     <div className=" mt-14">
-      {data.map((item) => {
+      {isTodo.map((item) => {
         return (
-         
+
           <div key={item.id} className=" flex justify-center mt-2 mb-2">
             <p className=" p-3 shadow-3xl rounded text-txtColor font-mainTxt text-2xl font-extrabold mt-3">
-              {item.val}
+              {item.todo}
             </p>
           </div>
         );
@@ -17,3 +17,4 @@ const View = ({ data, lastNum }) => {
 };
 
 export default View;
+
