@@ -37,32 +37,35 @@ const Add = () => {
         setDataBase(!dataBase)
     }
 
-    const toLoadFetchPost = async () => {
-        await onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const userID = user.uid
-                console.log(userID);
-                console.log();
-                const q = query(collection(db, "todo"), where("userid", "==", userID), orderBy("timeStamp", "desc"));
-                const fetchPost = async () => {
-                    await getDocs(q)
-                        .then((querySnapshot) => {
-                            const newData = querySnapshot.docs.map((doc) => ({
-                                ...doc.data(),
-                                id: doc.id
-                            }));
-                            setIsTodo(newData);
-                            console.log(newData);
-                            setIsRender(true)
-                        })
-                };
-                return fetchPost()
-
-            }
-
-        })
-    };
+    
     useEffect(() => {
+        const toLoadFetchPost = async () => {
+            await onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const userID = user.uid
+                    console.log(userID);
+                    console.log();
+                    const q = query(collection(db, "todo"), where("userid", "==", userID), orderBy("timeStamp", "desc"));
+                    const fetchPost = async () => {
+                        await getDocs(q)
+                            .then((querySnapshot) => {
+                                const newData = querySnapshot.docs.map((doc) => ({
+                                    ...doc.data(),
+                                    id: doc.id
+                                }));
+                                setIsTodo(newData);
+                                console.log(newData);
+                                setIsRender(true)
+                            })
+                    };
+                    return fetchPost()
+    
+                }
+    
+            })
+        };
+
+
         toLoadFetchPost();
     }, [dataBase])
 
