@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { auth } from "../../firebase";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 
@@ -23,7 +23,7 @@ const RegistrationForm = ({ changeStateFalse }) => {
         await createUserWithEmailAndPassword(auth, isEmail, isPassword)
             .then((userCredential) => {
                 //user created
-                const user = userCredential.user;
+                // const user = userCredential.user;
                 alert("user created")
 
 
