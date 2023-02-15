@@ -58,16 +58,16 @@ const Add = () => {
                                 setIsRender(true)
                             })
                     };
-                    return fetchPost()
-    
-                }
-    
+                    return fetchPost()   
+                }   
             })
         };
 
 
         toLoadFetchPost();
     }, [dataBase])
+
+    // dataBase
 
 // To change BackgroundColor
 const handleChangeBgLight = () => {
