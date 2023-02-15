@@ -1,5 +1,4 @@
 const View = ({ isTodo }) => {
-  // console.log(isTodo);
   return (
     <div className=" mt-14">
       {isTodo.map((item) => {
