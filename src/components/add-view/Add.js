@@ -18,7 +18,7 @@ const Add = () => {
     }
 
 
-    const auth = getAuth();
+    let auth = getAuth();
 
     const handleSubmit = async () => {
         if (!isValue)
@@ -40,6 +40,7 @@ const Add = () => {
     
     useEffect(() => {
         const toLoadFetchPost = async () => {
+            const auth = getAuth();
             await onAuthStateChanged(auth, (user) => {
                 if (user) {
                     const userID = user.uid
