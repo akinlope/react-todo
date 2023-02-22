@@ -12,8 +12,10 @@ const Login = () => {
     const changeStateTrue = () => {
         setIsRender(true)
     }
+
+
     return (
-        <div className=" bg-bgImg bg-cover h-screen w-screen">
+        <div className=" bg-bgImg bg-cover bg-txtColor">
             <div className=" flex justify-center items-center h-screen">
                 <div className=" backdrop-blur-md bg-black/30 rounded-md">
                         {!isRender && <LoginForm changeStateTrue={changeStateTrue} />}

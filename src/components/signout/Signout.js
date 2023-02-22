@@ -4,8 +4,8 @@ const Signout = () => {
 
     const navigate = useNavigate("")
     const auth = getAuth()
-    const handleLogout = () => {
-        signOut(auth).then(()=> {
+    const handleLogout = async () => {
+        await signOut(auth).then(()=> {
             console.log("user signed out");
             navigate("/")
         }).then((err)=> {
