@@ -44,7 +44,7 @@ const Add = () => {
             await onAuthStateChanged(auth, (user) => {
                 if (user) {
                     const userID = user.uid
-                    console.log(userID);
+                    // console.log(userID);
                     console.log();
                     const q = query(collection(db, "todo"), where("userid", "==", userID), orderBy("timeStamp", "desc"));
                     const fetchPost = async () => {
@@ -55,7 +55,7 @@ const Add = () => {
                                     id: doc.id
                                 }));
                                 setIsTodo(newData);
-                                console.log(newData);
+                                // console.log(newData);
                                 setIsRender(true)
                             })
                     };
@@ -68,7 +68,6 @@ const Add = () => {
         toLoadFetchPost();
     }, [dataBase])
 
-    // dataBase
 
 // To change BackgroundColor
 const handleChangeBgLight = () => {
@@ -79,11 +78,15 @@ const handleChangeBgDark = () => {
 setIsDark(true)
 }
 
+const reloadAfterDelete = () => {
+    setDataBase(true);
+}
 
 
-    console.log(isTodo);
+
+    // console.log(isTodo.id);
     return (
-        <div style={{backgroundColor: isDark ? '#002c3e' : ""}} className=" h-screen">
+        <div style={{backgroundColor: isDark ? '#3B3B3B' : ""}} className=" h-screen">
             <div className=" flex justify-around p-3">
                 <div className=" flex ">
                     <div className=" mr-5 cursor-pointer">
@@ -104,7 +107,7 @@ setIsDark(true)
                 <div className=" w-[500px]  mt-10 shadow-3xl pt-10 pb-10 pl-4 rounded-[10px]">
                     <input placeholder="What do you have to do today?" value={isValue} onChange={handleChange} className=" border-2 border-txtColor sm:w-[350px] w-[250px] h-[50px] sm:mr-8 mr-2 rounded-[10px] focus: shadow-none text-[16px] p-2" type="text" />
                     <button onClick={handleSubmit} className=" bg-txtColor h-[50px] w-[90px] rounded-[10px] font-mainTxt font-[800] text-xl text-secColor hover:bg-secColor hover:text-txtColor">Add</button>
-                    {isRender && <View isTodo={isTodo} />}
+                    {isRender && <View isTodo={isTodo} setReload={reloadAfterDelete} />}
 
                 </div>
             </div>

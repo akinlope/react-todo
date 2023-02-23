@@ -15,7 +15,7 @@ const Signout = () => {
 
 
     return (<div>
-        <p onClick={handleLogout} className=" hover:text-sm hover:font-[600] hover:text-txtColor duration-100">LogOut</p>
+        <p onClick={handleLogout} className=" cursor-pointer hover:font-[600] hover:text-txtColor">LogOut</p>
     </div>);
 }
 
