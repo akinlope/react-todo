@@ -4,6 +4,7 @@ import { db } from "../../firebase"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import View from "./View";
 import Signout from "../signout/Signout";
+import ErrorPage from "../../helpers/ErrorPage";
 
 
 const Add = () => {
@@ -12,6 +13,7 @@ const Add = () => {
     const [isTodo, setIsTodo] = useState("");
     const [dataBase, setDataBase] = useState(false);
     const [isDark, setIsDark] = useState(false);
+    const [error, setError] = useState(false);
 
     const handleChange = (e) => {
         setIsValue(e.target.value)
@@ -22,7 +24,7 @@ const Add = () => {
 
     const handleSubmit = async () => {
         if (!isValue)
-            return;
+            return setError(!error);
         try {
             const docRef = await addDoc(collection(db, "todo"), {
                 userid: auth.currentUser.uid,
@@ -37,7 +39,7 @@ const Add = () => {
         setDataBase(!dataBase)
     }
 
-    
+
     useEffect(() => {
         const toLoadFetchPost = async () => {
             const auth = getAuth();
@@ -59,8 +61,8 @@ const Add = () => {
                                 setIsRender(true)
                             })
                     };
-                    return fetchPost()   
-                }   
+                    return fetchPost()
+                }
             })
         };
 
@@ -69,24 +71,26 @@ const Add = () => {
     }, [dataBase])
 
 
-// To change BackgroundColor
-const handleChangeBgLight = () => {
-    setIsDark(false)
-    console.log("cicked...");
-}
-const handleChangeBgDark = () => {
-setIsDark(true)
-}
+    // To change BackgroundColor
+    const handleChangeBgLight = () => {
+        setIsDark(false)
+    }
+    const handleChangeBgDark = () => {
+        setIsDark(true)
+    }
 
-const reloadAfterDelete = () => {
-    setDataBase(true);
-}
-
+    const reloadAfterDelete = () => {
+        setDataBase(true);
+    }
+    const handleCloseError = () => {
+        setError(!error)
+    }
 
 
     // console.log(isTodo.id);
     return (
-        <div style={{backgroundColor: isDark ? '#3B3B3B' : ""}} className=" h-screen">
+        <div style={{ backgroundColor: isDark ? '#3B3B3B' : "" }} className=" h-screen">
+            {error && <ErrorPage  handleCloseError={handleCloseError}/>}
             <div className=" flex justify-around p-3">
                 <div className=" flex ">
                     <div className=" mr-5 cursor-pointer">

@@ -1,6 +1,10 @@
 import Add from "./components/add-view/Add";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/login-reg/Login";
+// library
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
 
@@ -12,9 +16,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/add" element={<Add />} />
-
-
         </Routes>
+          <ToastContainer />
+          {/* <ErrorPage /> */}
       </div>
       {/* </div> */}
 

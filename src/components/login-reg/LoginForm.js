@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { toastError, toastSuccess } from "../../helpers/functions";
+
 
 
 const LoginForm = ({ changeStateTrue }) => {
@@ -21,24 +23,26 @@ const LoginForm = ({ changeStateTrue }) => {
         setIsPassword(e.target.value);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (isEmail.trim().length === 0){ setError(true);}
-        if (isPassword.trim().length < 8){ return setPError(true);}
+        if (isEmail.trim().length === 0) { setError(true); }
+        if (isPassword.trim().length < 8) { return setPError(true); }
 
         const auth = getAuth();
-        signInWithEmailAndPassword(auth, isEmail, isPassword)
+        await signInWithEmailAndPassword(auth, isEmail, isPassword)
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(`${user} signed in`)
+                toastSuccess("Login successful")
                 navigate("/add")
                 changeStateTrue()
             })
             .catch((err) => {
-                const errCode = err.code;
-                const errMsg = err.message;
-                console.log(errCode, errMsg)
+                toastError("Oops! Could not log you in")
+                // const errCode = err.code;
+                // const errMsg = err.message;
+                // console.log(errCode, errMsg)
             })
     }
 
@@ -51,11 +55,11 @@ const LoginForm = ({ changeStateTrue }) => {
                     <h1 className=" text-2xl text-txtColor font-mainTxt font-[900]">LOGIN FORM</h1>
                 </div>
                 <div className=" pb-3">
-                    <input value={isEmail} onChange={handleEmail} className=" rounded-md p-2 w-[250px]" type="email" placeholder="Your Email Address" style={{backgroundColor: error ? "salmon" : " ", border: error ? "red" : "none"}}/>
+                    <input value={isEmail} onChange={handleEmail} className=" rounded-md p-2 w-[250px]" type="email" placeholder="Your Email Address" style={{ backgroundColor: error ? "salmon" : " ", border: error ? "red" : "none" }} />
                 </div>
                 <div className=" pb-10 ">
-                    <input value={isPassword} onChange={handlePassword} className=" rounded-md p-2 w-[250px]" type="password" placeholder="Your Password" style={{backgroundColor: pError ? "salmon" : " ", border: pError ? "red" : "none"}}/>
-                    { pError && <p className=" text-txtColor mt-[4px] font-medium text-sm">Password can't be lesser than 8-digits</p>}
+                    <input value={isPassword} onChange={handlePassword} className=" rounded-md p-2 w-[250px]" type="password" placeholder="Your Password" style={{ backgroundColor: pError ? "salmon" : " ", border: pError ? "red" : "none" }} />
+                    {pError && <p className=" text-txtColor mt-[4px] font-medium text-sm">Password can't be lesser than 8-digits</p>}
                 </div>
 
                 <button className=" rounded-md p-2 w-[250px] bg-txtColor text-xl font-mainTxt font-extrabold text-secColor hover:bg-secColor hover:text-txtColor">LOGIN</button>

@@ -10,7 +10,8 @@ module.exports = {
     colors: {
       txtColor: "#F7444E",
       priColor: "#D4D4CE",
-      secColor: "#F6F6F6"
+      secColor: "#F6F6F6",
+      priBlack: "#000000"
     },
     boxShadow: {
       '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
