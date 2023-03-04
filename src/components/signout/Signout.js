@@ -5,18 +5,20 @@ const Signout = () => {
     const navigate = useNavigate("")
     const auth = getAuth()
     const handleLogout = async () => {
-        await signOut(auth).then(()=> {
+        await signOut(auth).then(() => {
             console.log("user signed out");
             navigate("/")
-        }).then((err)=> {
+        }).then((err) => {
             console.log(err);
         })
     }
 
 
-    return (<div>
-        <p onClick={handleLogout} className=" cursor-pointer hover:font-[600] hover:text-txtColor">LogOut</p>
-    </div>);
+    return (
+        <div className=" ">
+            <button onClick={handleLogout} className=" text-secColor font-semibold hover:text-txtColor bg-txtColor p-2 pl-4 pr-4 rounded-[10px]  hover:bg-secColor">LogOut</button>
+        </div>
+    );
 }
 
 export default Signout;

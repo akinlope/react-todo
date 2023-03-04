@@ -4,7 +4,8 @@ import { db } from "../../firebase"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import View from "./View";
 import Signout from "../signout/Signout";
-import ErrorPage from "../../helpers/ErrorPage";
+import ErrorPage from "../helpers/ErrorPage";
+import { toastError, toastSuccess} from "../helpers/functions"
 
 
 const Add = () => {
@@ -32,8 +33,10 @@ const Add = () => {
                 timeStamp: serverTimestamp()
             });
             console.log("Document written with ID: ", docRef.id);
+            toastSuccess("Todo added.")
         } catch (e) {
             console.error("Error adding document: ", e);
+            toastError("Oops, could not add Todo.")
         }
         setIsValue("")
         setDataBase(!dataBase)
@@ -104,7 +107,7 @@ const Add = () => {
                         </svg>
                     </div>
                 </div>
-                <Signout />
+               <Signout />
             </div>
             <div className=" flex justify-center">
 

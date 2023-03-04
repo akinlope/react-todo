@@ -1,5 +1,6 @@
 import { db } from "../../firebase";
 import { deleteDoc, doc } from "firebase/firestore";
+import { toastError, toastSuccess } from "../helpers/functions";
 
 const View = ({ isTodo, setReload}) => {
 
@@ -9,8 +10,10 @@ const View = ({ isTodo, setReload}) => {
      deleteDoc(docRef).then(()=> {
       console.log("Deleted");
       setReload();
+      toastSuccess("Todo deleted.")
     }).catch((err)=> {
       console.log(err);
+      toastError("Todo not deleted.")
     }) 
  
   }

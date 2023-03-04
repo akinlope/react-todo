@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { toastError, toastSuccess } from "../../helpers/functions";
+import { toastError, toastSuccess } from "../helpers/functions";
 
 
 
@@ -34,12 +34,12 @@ const LoginForm = ({ changeStateTrue }) => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(`${user} signed in`)
-                toastSuccess("Login successful")
+                toastSuccess("Login successful.")
                 navigate("/add")
                 changeStateTrue()
             })
             .catch((err) => {
-                toastError("Oops! Could not log you in")
+                toastError("Oops! Could not log you in.")
                 // const errCode = err.code;
                 // const errMsg = err.message;
                 // console.log(errCode, errMsg)

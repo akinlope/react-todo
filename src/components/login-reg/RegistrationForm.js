@@ -2,7 +2,7 @@ import { useState } from "react";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { toastError, toastSuccess } from "../../helpers/functions";
+import { toastError, toastSuccess } from "../helpers/functions";
 
 
 const RegistrationForm = ({ changeStateFalse }) => {
@@ -34,7 +34,7 @@ const RegistrationForm = ({ changeStateFalse }) => {
                 //user created
                 // const user = userCredential.user;
                 // alert("user created")
-                toastSuccess("Registration successful")
+                toastSuccess("Registration successful.")
 
 
             }).then(() => {
@@ -56,7 +56,7 @@ const RegistrationForm = ({ changeStateFalse }) => {
                 // const errCode = err.code;
                 // const errMsg = err.message;
                 // console.log(errCode, errMsg)
-                toastError("Oops! Could not register you")
+                toastError("Oops! Could not register you.")
             });
 
 
